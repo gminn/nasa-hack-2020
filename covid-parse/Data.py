@@ -9,20 +9,30 @@ class Data:
         with open (os.path.join("/Users/catherinephilpott/Catherine's Folder/Michigan/nasa-hackathon-2020/covid-parse", filename)) as csv_file:
             self.reader = csv.reader(csv_file, delimiter = ',')
             line = 0
-            rowData = np.array([])
+            rowData = []
             for row in self.reader:
-                if(line != 0):
+                
+                if line != 0:
+                    
                     if row[6] == "Florida" or row[6] == "South Carolina" or row[6] == "Alabama" or row[6] == "Georgia":
+                        #print(row[6])
                         for x in range (11, 139):
-                            np.append(rowData, row[x])
+                            
+                            rowData.append(row[x])
+                            
+                        
+                        
                     self.theData[row[10]] = rowData
+                
                 line = line + 1
-    def printRows(self):
+    def writeRows(self):
+        file = open("/Users/catherinephilpott/Catherine's Folder/Michigan/nasa-hackathon-2020/covid-parse/writeData.txt","r+")
         vector_orange =self.theData["Orange, Florida, US"]
         for x in vector_orange:
-            print(x)
+            file.write(x)
+            file.write(", ")
         #print(vector_orange)
-        print(self.theData["Madison, Florida, US"])
+        #print(self.theData["Madison, Florida, US"])
 
                     
 
