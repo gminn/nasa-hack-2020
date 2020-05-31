@@ -1,17 +1,21 @@
 import csv
 import os
 from collections import namedtuple
+import xlrd
 
 LatLon = namedtuple("LatLon", "latitude longitude")
+Counties = namedtuple("Counties", "countyName state")
 
 class Data:
 # constructor
     def __init__(self, filename): # add other parameters
         self.theData = {}
         self.countyLatLon = {}
+        CountyNamesTemp = []
+        self.PopulationByCounty = {}
 
         with open (os.path.join("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse", filename)) as csv_file:
-            print(os.path.join("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse", filename))
+            #print(os.path.join("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse", filename))
             self.reader = csv.reader(csv_file, delimiter = ',')
             line = 0
             
@@ -21,6 +25,9 @@ class Data:
                     
                     if row[6] == "Florida" or row[6] == "South Carolina" or row[6] == "Alabama" or row[6] == "Georgia":
                         #print(row[6])
+                        thisCounty = Counties(countyName=row[5], state=row[6])
+                        CountyNamesTemp.append(thisCounty)
+                        temp = 5
                         for x in range (11, 140):
                             
                             rowData.append(row[x])
@@ -32,18 +39,52 @@ class Data:
                 
                 line = line + 1
 
-    def getCovidDate(self, countyName)
-        return self.theData[countyname]
+        self.countyNames = CountyNamesTemp
 
-    def getCountyLatLon(self, countyName)
-        return self.countyLatLon[countyName]
+        # parse spreadsheets
+        alabama = xlrd.open_workbook('Alabama_Population.xlsx')
+        alabamaData = alabama.sheet_by_index(0)
+        
+           
+        self._parseData(5,72,'Alabama_Population.xlsx',"Alabama")
+        self._parseData(5, 164, 'Georgia-Population.xlsx',"Georgia")
+        self._parseData(5,51, 'SC_Population.xlsx', "South Carolina")
+        self._parseData(5, 72, 'Florida_Population.xlsx', "Florida")
 
-    def writeRows(self):
-        file = open("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse/writeData.txt","r+")
-        vector_orange =self.theData["Orange, Florida, US"]
-        for x in vector_orange:
-            file.write(x)
-            file.write(",")
+        
+
+
+    def _parseData(self,startRow, endRow, SpreadSheetName, stateName):
+        spreadsheet = xlrd.open_workbook(SpreadSheetName)
+        data = spreadsheet.sheet_by_index(0)
+        
+        for i in range(startRow, endRow):
+            countyFullName = data.cell(i,0)
+            fullName = countyFullName.value
+
+            fullName = fullName.replace('.','',1)
+            fullNameList = fullName.split(' ')
+            countyName = fullNameList[0]
+            countyFullName = countyName + ", " + stateName + ", US"
+
+            populationCell = data.cell(i,12)
+            populationCell = populationCell.value
+            self.PopulationByCounty[countyFullName] = populationCell
+           
+
+
+
+    
+    # def getCovidDate(self,countyName)
+      #  return self.theData[countyname]
+
+    #def getCountyLatLon(self,countyName)
+      #  return self.countyLatLon[countyName]
+    
+    #def writeRows(self):
+       # file = open("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse/writeData.txt","r+")
+        #LatLon orange = getCountyLatLon("Orange, Florida, US")
+        #file.write(orange[0], orange[1])
         #print(vector_orange)
         #print(self.theData["Madison, Florida, US"])
 

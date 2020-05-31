@@ -5,7 +5,7 @@ def main():
     filename = "time_series_covid19_confirmed_US.csv"
     covid_parsed = Data(filename)
     #covid_parsed.printRows()
-    covid_parsed.writeRows()
+   # covid_parsed.writeRows()
 
 if __name__ == "__main__":
     main()
