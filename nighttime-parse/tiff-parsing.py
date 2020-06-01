@@ -44,7 +44,6 @@ def main():
     # Define path to tif files
     # preMigrFilename = "snapshot-2018-09-23T00_00_00Z.tif" # TODO pass in as CL args
     # postMigrFilename = "snapshot-2018-10-21T00_00_00Z.tif"
-    # basePath = "/Users/gillianminnehan/Documents/Personal_Projects/nasa_space_apps2020/2020-team-repo/nasa-hackathon-2020/nighttime-parse/tif-files/snapshot-2018-10-21T00_00_00Z/"
     countyList = ['Hillsborough']
     tuple1 = (12, 15)
     tuple2 = (34, 72)
