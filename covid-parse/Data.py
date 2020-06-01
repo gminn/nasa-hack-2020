@@ -13,8 +13,9 @@ class Data:
         self.countyLatLon = {}
         CountyNamesTemp = []
         self.PopulationByCounty = {}
+        projectpath = input('Enter the complete filepath of the nasa-hackathon-2020 folder (ex. .../nasa-hackathon-2020')
 
-        with open (os.path.join("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse", filename)) as csv_file:
+        with open (os.path.join(projectpath, "/covid-parse", filename)) as csv_file:
             #print(os.path.join("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse", filename))
             self.reader = csv.reader(csv_file, delimiter = ',')
             line = 0
@@ -73,21 +74,5 @@ class Data:
            
 
 
-
-    
-    # def getCovidDate(self,countyName)
-      #  return self.theData[countyname]
-
-    #def getCountyLatLon(self,countyName)
-      #  return self.countyLatLon[countyName]
-    
-    #def writeRows(self):
-       # file = open("/Users/catherinephilpott/Catherines Folder/Michigan/nasa-hackathon-2020/covid-parse/writeData.txt","r+")
-        #LatLon orange = getCountyLatLon("Orange, Florida, US")
-        #file.write(orange[0], orange[1])
-        #print(vector_orange)
-        #print(self.theData["Madison, Florida, US"])
-
-                    
 
     
