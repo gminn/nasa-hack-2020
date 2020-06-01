@@ -1,5 +1,5 @@
-from covid-parse.Data import Data # TODO: change to underscore
-from nighttime-parse.Image import Image
+from covid_parse.Data import Data # TODO: change to underscore
+from nighttime_parse.Image import Image
 
 def parse_covid_data():
     # Inform user time series data is parsing
@@ -40,7 +40,7 @@ def main():
     cases_new = county_population * percent_with_covid * population_increase
     # find sum of cases in that county
     sum_cases = 0
-    for i in range 128
+    for i in range (0, 128):
         sum_cases+=cases_vector[i]
     print("The total number of cases before displacement in " + county_state_US + " is " + sum_cases + ".")
     sum_cases + cases_new
