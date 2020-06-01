@@ -1,15 +1,13 @@
 from Image import Image
-#import earthpy as et
-#from PIL import Image
 
 #READ: THIS IS A TESTER FILE AND NOT PART OF THE DRIVER. 
 # TO RUN, INPUT THE COMPLETE FILE PATH OF THE BELOW FILES:
 
 #TODO: Replace PROJECTPATH with the complete filepath of this project
-PROJECTPATH = ".../nasa-hackathon-2020/"
+PROJECTPATH = "/Users/gillianminnehan/Documents/Personal_Projects/nasa_space_apps2020/2020-team-repo/nasa-hackathon-2020/"
 
 preMigrImgFilepath = PROJECTPATH + "nighttime-parse/tif-files/snapshot-2018-09-23T00_00_00Z/snapshot-2018-09-23T00_00_00Z.tif"
-postMigrImgFilepath  = PROJECTPATH + "nasa-hackathon-2020/nighttime-parse/tif-files/snapshot-2018-10-21T00_00_00Z/snapshot-2018-10-21T00_00_00Z.tif"
+postMigrImgFilepath  = PROJECTPATH + "nighttime-parse/tif-files/snapshot-2018-10-21T00_00_00Z/snapshot-2018-10-21T00_00_00Z.tif"
 
 def printMetaData() :
     # open tif files and process using geotiff
@@ -29,22 +27,19 @@ def printMetaData() :
             print("---------------")
 
 def printImageArr() :
-    preMigrImg = Image.open(preMigrImgFilepath)
+    preMigrImg = im.open(preMigrImgFilepath)
     preMigrImg.show()
-    postMigrImg = Image.open(postMigrImgFilepath)
+    postMigrImg = im.open(postMigrImgFilepath)
     postMigrImg.show()
     preMigrImgArr = np.array(preMigrImg)
     postMigrImgArr = np.array(postMigrImg)
     newarr = abs(postMigrImgArr - preMigrImgArr)
-    newImg = Image.fromarray(newarr)
+    newImg = im.fromarray(newarr)
     newImg.show()
 
 def main():
 
-    # Define path to tif files
-    # preMigrFilename = "snapshot-2018-09-23T00_00_00Z.tif" # TODO pass in as CL args
-    # postMigrFilename = "snapshot-2018-10-21T00_00_00Z.tif"
-    countyList = ['Hillsborough']
+    countyList = ['Hillsborough', 'Orange']
     tuple1 = (12, 15)
     tuple2 = (34, 72)
     list = [tuple1, tuple2]
