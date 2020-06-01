@@ -2,8 +2,14 @@ from Image import Image
 #import earthpy as et
 #from PIL import Image
 
-preMigrImgFilepath = "/Users/gillianminnehan/Documents/Personal_Projects/nasa_space_apps2020/2020-team-repo/nasa-hackathon-2020/nighttime-parse/tif-files/snapshot-2018-09-23T00_00_00Z/snapshot-2018-09-23T00_00_00Z.tif"
-postMigrImgFilepath  = "/Users/gillianminnehan/Documents/Personal_Projects/nasa_space_apps2020/2020-team-repo/nasa-hackathon-2020/nighttime-parse/tif-files/snapshot-2018-10-21T00_00_00Z/snapshot-2018-10-21T00_00_00Z.tif"
+#READ: THIS IS A TESTER FILE AND NOT PART OF THE DRIVER. 
+# TO RUN, INPUT THE COMPLETE FILE PATH OF THE BELOW FILES:
+
+#TODO: Replace PROJECTPATH with the complete filepath of this project
+PROJECTPATH = ".../nasa-hackathon-2020/"
+
+preMigrImgFilepath = PROJECTPATH + "nighttime-parse/tif-files/snapshot-2018-09-23T00_00_00Z/snapshot-2018-09-23T00_00_00Z.tif"
+postMigrImgFilepath  = PROJECTPATH + "nasa-hackathon-2020/nighttime-parse/tif-files/snapshot-2018-10-21T00_00_00Z/snapshot-2018-10-21T00_00_00Z.tif"
 
 def printMetaData() :
     # open tif files and process using geotiff
