@@ -2,7 +2,7 @@ import rasterio as rio
 import numpy as np
 from PIL import Image
 
-class Image:
+class Img:
 
     # @param: countyList is a list of counties (strings)
     # @param: latLongHash is the hash table mapping counties to lat/lon
@@ -18,20 +18,20 @@ class Image:
         self.latLongHash = latLongHash
 
     # returns object containing image bounding box
-    def getImgOrigin():
+    def getImgOrigin(self):
         with rio.open(preMigrImgFilepath) as preMigrImg:
             self.originX = preMigrImg.bounds.left
             self.originY = preMigrImg.bounds.top
             return preMigrImg.bounds
 
     # @param: lat, lon are the coordinates to be converted
-    def convertToLocal(latLonTuple):
+    def convertToLocal(self, latLonTuple):
         return (latLonTuple[1] - self.originX, latLonTuple[0] - self.originY)
 
     # @param: pre is the preMigration image
     # @param: post is the postMigration image
     # @param: latLon is
-    def calcPPDChange(pre, post, coord):
+    def calcPPDChange(self, pre, post, coord):
         x = coord[0]
         y = coord[1]
         PPDChange = abs(post.getpixel(x, y) - pre.getpixel(x, y))/pre.getpixel(x, y)
@@ -39,7 +39,7 @@ class Image:
 
     # @param: countyList is a list of counties
     # @param: latLongHash is a hash table containing key (county) and value (struct of lat long) pairs
-    def fillHash(countyList, latLongHash):
+    def fillHash(self, countyList, *latLongHash):
         # open tif files
         preMigrImg = Image.open(self.preMigrImgFilepath)
         postMigrImg = Image.open(self.postMigrImgFilepath)
