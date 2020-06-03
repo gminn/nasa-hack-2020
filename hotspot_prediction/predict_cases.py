@@ -1,5 +1,5 @@
 from covid_parse.Data import Data # TODO: change to underscore
-from nighttime_parse.Image import Image
+from nighttime_parse.Img import Img
 
 def parse_covid_data():
     # Inform user time series data is parsing
@@ -10,9 +10,9 @@ def parse_covid_data():
     # return instance of class to be used in main
     return covid_parsed
 
-def parse_light_data(countyList, latLongHash, preMigrFilepath, postMigrFilepath):
+def parse_light_data(countyList, latLonHash, preMigrFilepath, postMigrFilepath):
     # call Image constructor to create instance of Image
-    light_parsed = Image(countyList, latLongHash, preMigrFilepath, postMigrFilepath)
+    light_parsed = Img(countyList, latLonHash, preMigrFilepath, postMigrFilepath)
     return light_parsed # contains percent light change hash table
 
 
@@ -21,11 +21,11 @@ def main():
     covid_parsed = parse_covid_data()
     # assign parameters to parse light data
     countyList = covid_parsed.countyNames
-    latLongHash = covid_parsed.latLongHash
+    latLonHash = covid_parsed.countyLatLon
     preMigrFilepath = "snapshot-2018-09-23T00_00_00Z.tif"
     postMigrFilepath = "snapshot-2018-09-23T00_00_00Z.tif"
     # parse hurricane data 
-    light_parsed = parse_light_data(countyList, latLongHash, preMigrFilepath, postMigrFilepath)
+    light_parsed = parse_light_data(countyList, latLonHash, preMigrFilepath, postMigrFilepath)
     # Get location user would like to project for from CL
     county_state_US = input("Enter '[County], [State], US'")
     # access the % population increase
