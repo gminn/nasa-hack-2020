@@ -15,10 +15,11 @@ class Data:
         CountyNamesTemp = []
         self.PopulationByCounty = {}
         
-        projectpath = input('Enter the complete filepath of the nasa-hackathon-2020 folder (ex. .../nasa-hackathon-2020')
+        projectpath = input('Enter the complete filepath of the nasa-hackathon-2020 folder (ex. .../nasa-hackathon-2020): ')
     
         # Parse COVID-19 cases data:
-        with open (os.path.join(projectpath, "/covid-parse", filename)) as csv_file:
+        path = projectpath + "/covid_parse/"
+        with open (os.path.join(path, filename)) as csv_file:
             self.reader = csv.reader(csv_file, delimiter = ',')
             line = 0
             #iterate over each row in csv and parse
