@@ -1,4 +1,6 @@
 from Image import Image
+import numpy as np
+import rasterio as rio
 
 #READ: THIS IS A TESTER FILE AND NOT PART OF THE DRIVER. 
 # TO RUN, INPUT THE COMPLETE FILE PATH OF THE BELOW FILES:

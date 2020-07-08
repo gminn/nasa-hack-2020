@@ -9,17 +9,17 @@ class Img:
     # @param: preMigrImgFilePath is the filepath for the pre-migration image
     # @param: postMicrImgFIlePath is the filepath for the post-migration image
     def __init__(self, countyList, latLongHash, preMigrImgFilepath, postMigrImgFilepath):
-        self.nightHash = self.fillHash(countyList, latLongHash)
         self.preMigrImgFilepath = preMigrImgFilepath
         self.postMigrImgFilepath = postMigrImgFilepath
         self.originX = self.getImgOrigin().left
         self.originY = self.getImgOrigin().top
         self.countyList = countyList
         self.latLongHash = latLongHash
+        self.nightHash = self.fillHash(countyList, latLongHash)
 
     # returns object containing image bounding box
     def getImgOrigin(self):
-        with rio.open(preMigrImgFilepath) as preMigrImg:
+        with rio.open(self.preMigrImgFilepath) as preMigrImg:
             self.originX = preMigrImg.bounds.left
             self.originY = preMigrImg.bounds.top
             return preMigrImg.bounds
@@ -45,8 +45,8 @@ class Img:
         postMigrImg = Image.open(self.postMigrImgFilepath)
         for county in countyList:
             countyLatLon = latLongHash[county] # get lat & lon of county
-            countyCoord = convertToLocal(countyLatLon) # convert to image coordinates
+            countyCoord = self.convertToLocal(countyLatLon) # convert to image coordinates
 
             # add key (county) / value (percent pop density change) to hash
-            self.nightHash[county] = calcPPDChange(preMigrImg, postMigrImg, countyCoord)
+            self.nightHash[county] = self.calcPPDChange(preMigrImg, postMigrImg, countyCoord)
         return self.nightHash
